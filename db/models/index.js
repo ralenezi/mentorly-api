@@ -48,4 +48,4 @@ db.Sequelize = Sequelize;
  * @param {object} options - alter: true or force true. By default it's `alter: true`
  */
 
-export default db;
+module.exports = db;
