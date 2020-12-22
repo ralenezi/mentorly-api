@@ -1,5 +1,9 @@
+import { connect } from "./db";
 import express from "express";
 const app = express();
-app.listen(8080, () => {
-  console.log("App is listening");
+
+connect(async () => {
+  app.listen(8185, () => {
+    console.log("App is running!");
+  });
 });

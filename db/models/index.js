@@ -47,14 +47,5 @@ db.Sequelize = Sequelize;
  * @param {function} cb - your call back function such as app.listen or anything you want to happen when the database is connected
  * @param {object} options - alter: true or force true. By default it's `alter: true`
  */
-db.connect = async (cb, options = { alter: true }) => {
-  try {
-    await db.sequelize.sync(options);
-    console.log("Connection to the database successful!");
-    cb();
-  } catch (error) {
-    console.error("Error connecting to the database: ", error);
-  }
-};
 
-module.exports = db;
+export default db;
