@@ -5,6 +5,7 @@ const JWTStrategy = require("passport-jwt").Strategy;
 const { JWT_SECRET } = require("../config/keys");
 const { fromAuthHeaderAsBearerToken } = require("passport-jwt").ExtractJwt;
 
+// sign in
 exports.localStrategy = new LocalStrategy(async (email, password, done) => {
   //
   console.log("Hello?");

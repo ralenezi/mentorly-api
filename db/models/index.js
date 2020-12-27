@@ -48,4 +48,8 @@ db.Sequelize = Sequelize;
  * @param {object} options - alter: true or force true. By default it's `alter: true`
  */
 
+// User ----> Order
+db.User.hasMany(db.Trip, { as: "trips", foreignKey: "userId" });
+db.Trip.belongsTo(db.User, { as: "user" });
+
 module.exports = db;

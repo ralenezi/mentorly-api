@@ -1,13 +1,31 @@
 const express = require("express");
 
+const defaultOptions = {
+  listMW: [],
+  createMW: [],
+  updateMW: [],
+  destroyMW: [],
+};
 class CRUDRouter extends express.Router {
-  constructor(crudController, options) {
+  constructor(crudController, options = defaultOptions) {
     super();
-    function emptyFun() {}
-    this.get("/", options?.listMW ?? emptyFun, crudController.list);
-    this.post("/create", options?.createMW ?? emptyFun, crudController.create);
-    this.put("/:id", options?.updateMW ?? emptyFun, crudController.update);
-    this.delete("/:id", options?.destroyMW ?? emptyFun, crudController.destory);
+    function next(req, res, next) {
+      console.log("Next");
+      next();
+    }
+
+    this.get(
+      "/",
+      options?.listMW ?? next,
+      (req, res, next) => {
+        console.log("Hello,?");
+        next();
+      },
+      crudController.list
+    );
+    this.post("/create", options?.createMW ?? next, crudController.create);
+    this.put("/:id", options?.updateMW ?? next, crudController.update);
+    this.delete("/:id", options?.destroyMW ?? next, crudController.destory);
   }
 }
 module.exports = CRUDRouter;
