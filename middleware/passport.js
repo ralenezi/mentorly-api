@@ -1,5 +1,5 @@
 const LocalStrategy = require("passport-local");
-const { User } = require("../db/models");
+const { User, Profile } = require("../db/models");
 const bcrypt = require("bcrypt");
 const JWTStrategy = require("passport-jwt").Strategy;
 const { JWT_SECRET } = require("../config/keys");
@@ -7,8 +7,6 @@ const { fromAuthHeaderAsBearerToken } = require("passport-jwt").ExtractJwt;
 
 // sign in
 exports.localStrategy = new LocalStrategy(async (email, password, done) => {
-  //
-  console.log("Hello?");
   try {
     const user = await User.findOne({
       where: { email: email },
@@ -40,7 +38,10 @@ exports.jwtStrategy = new JWTStrategy(
         // return done(error); // status 401
         throw error;
       }
-      const user = await User.findByPk(jwtPayload.id);
+      const user = await User.findByPk(jwtPayload.id, {
+        include: [{ model: Profile, as: "profile" }],
+      });
+      console.log("FETCHED MODEL: USER, ", user.profile);
       done(null, user);
     } catch (error) {
       done(error);

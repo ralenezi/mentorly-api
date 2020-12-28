@@ -1,4 +1,4 @@
-const { User } = require("../db/models");
+const { User, Profile } = require("../db/models");
 const { hashPassword } = require("../helpers/authentication");
 const JWT = require("jsonwebtoken");
 const { JWT_EXPIRATION_DATE, JWT_SECRET } = require("../config/keys");
@@ -8,6 +8,9 @@ exports.createUser = async (req, res, next) => {
     req.body.password = hashedPassword;
     console.log("USER:", User);
     const user = await User.create(req.body);
+    // Assosiate User to Profile
+    const profile = await Profile.create({ userId: user.id, ...req.body });
+
     res.status(201).json(tokenObject(user));
   } catch (error) {
     next(error);

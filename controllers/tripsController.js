@@ -1,8 +1,9 @@
-import { Trip, User } from "../db/models";
+import { Profile, Trip } from "../db/models";
 export const create = (req, res, next) => {
   try {
     console.log("Hello", req.user.id);
-    req.body.userId = req.user.id;
+    // get the profile
+    req.body.profileId = req.user.profile.id;
     res.image = req.image;
     next();
   } catch (error) {
@@ -11,7 +12,7 @@ export const create = (req, res, next) => {
 };
 
 export const getTripsForUser = async (req, res, next) => {
-  const user = await User.findByPk(req.params.uid, {
+  const user = await Profile.findByPk(req.params.uid, {
     include: [{ model: Trip, as: "trips" }],
   });
 };
@@ -19,9 +20,26 @@ export const getTripsForUser = async (req, res, next) => {
 export const listTripsOptions = {
   include: [
     {
-      model: User,
-      as: "user",
+      model: Profile,
+      as: "profile",
       attributes: ["name"],
     },
   ],
+};
+
+export const getSingleTrip = async (req, res, next) => {
+  try {
+    const tripId = req.params.id;
+    const trip = await Trip.findByPk(tripId);
+    if (trip) {
+      res.json(trip);
+    } else {
+      const error = new Error();
+      error.status = 404;
+      error.message = `Trip with id ${tripId} doesn't exist`;
+      next(error);
+    }
+  } catch (error) {
+    next(error);
+  }
 };

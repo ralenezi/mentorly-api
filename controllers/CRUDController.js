@@ -16,7 +16,7 @@ class CRUDController {
 
   // UPDATE
   update = async (req, res) => {
-    const { id } = req.params;
+    const { id } = req;
     console.log(`Got ${this.item} id:`, id);
     try {
       const foundItem = await this.ITEM.findByPk(id);
@@ -33,7 +33,7 @@ class CRUDController {
 
   // DELETE
   destory = async (req, res) => {
-    const { id } = req.params;
+    const { id } = req;
     try {
       const foundItem = await this.ITEM.findByPk(id);
       if (foundItem) {

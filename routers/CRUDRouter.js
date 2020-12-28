@@ -23,9 +23,9 @@ class CRUDRouter extends express.Router {
       },
       crudController.list
     );
-    this.post("/create", options?.createMW ?? next, crudController.create);
-    this.put("/:id", options?.updateMW ?? next, crudController.update);
-    this.delete("/:id", options?.destroyMW ?? next, crudController.destory);
+    this.post("/", options?.createMW ?? next, crudController.create);
+    this.put("/", options?.updateMW ?? next, crudController.update);
+    this.delete("/", options?.destroyMW ?? next, crudController.destory);
   }
 }
 module.exports = CRUDRouter;

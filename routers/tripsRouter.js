@@ -4,6 +4,7 @@ import CRUDController from "../controllers/CRUDController";
 import CRUDRouter from "./CRUDRouter";
 import { Trip } from "../db/models";
 import express from "express";
+import { getSingleTrip } from "../controllers/tripsController";
 import passport from "passport";
 import upload from "../middleware/multer";
 
@@ -20,5 +21,7 @@ router.use(
     updateMW: [signInPassportMiddleware],
   })
 );
+
+router.get("/:id", getSingleTrip);
 
 export default router;

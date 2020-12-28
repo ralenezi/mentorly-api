@@ -8,21 +8,9 @@ module.exports = (sequelize, DataTypes) => {
         msg: "This user already exists!",
       },
     },
-    name: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    slug: {
-      type: DataTypes.STRING,
-      unique: true,
-    },
     password: {
       type: DataTypes.STRING,
       allowNull: false,
-    },
-    image: {
-      type: DataTypes.STRING,
-      allowNull: true,
     },
   });
 

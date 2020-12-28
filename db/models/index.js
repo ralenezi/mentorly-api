@@ -49,7 +49,10 @@ db.Sequelize = Sequelize;
  */
 
 // User ----> Order
-db.User.hasMany(db.Trip, { as: "trips", foreignKey: "userId" });
-db.Trip.belongsTo(db.User, { as: "user" });
+db.Profile.hasMany(db.Trip, { as: "trips", foreignKey: "profileId" });
+db.Trip.belongsTo(db.Profile, { as: "profile" });
+// User >----< Profile
+db.User.hasOne(db.Profile, { as: "profile", foreignKey: "userId" });
+db.Profile.belongsTo(db.User, { as: "profile" });
 
 module.exports = db;
