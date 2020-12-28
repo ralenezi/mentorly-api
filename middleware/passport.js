@@ -30,17 +30,16 @@ exports.jwtStrategy = new JWTStrategy(
     secretOrKey: JWT_SECRET,
   },
   async (jwtPayload, done) => {
-    console.log(
-      "Seconds left on this session:",
-      (jwtPayload.exp - Date.now()) / 1000,
-      "s"
-    );
-    if (jwtPayload.exp < Date.now()) {
-      let error = new Error("Token expired");
-      error.status = 401;
-      return done(error); // status 401
-    }
+    const secondsLeft = (jwtPayload.exp - Date.now()) / 1000;
+    console.log(`Seconds left on this session: ${secondsLeft}s`);
+    // TODO: Fix me here, it's crashing when the session is expired!
     try {
+      if (jwtPayload.exp < Date.now()) {
+        let error = new Error("Token is expired");
+        error.status = 401;
+        // return done(error); // status 401
+        throw error;
+      }
       const user = await User.findByPk(jwtPayload.id);
       done(null, user);
     } catch (error) {
