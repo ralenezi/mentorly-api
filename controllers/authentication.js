@@ -6,6 +6,7 @@ exports.createUser = async (req, res, next) => {
   try {
     const hashedPassword = hashPassword(req.body.password);
     req.body.password = hashedPassword;
+    req.body.email = req.body.username;
     console.log("USER:", User);
     const user = await User.create(req.body);
     // Assosiate User to Profile

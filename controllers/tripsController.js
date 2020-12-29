@@ -22,7 +22,7 @@ export const listTripsOptions = {
     {
       model: Profile,
       as: "profile",
-      attributes: ["name"],
+      attributes: ["id", "name", "image"],
     },
   ],
 };

@@ -12,7 +12,14 @@ export const getSingleProfile = async (req, res, next) => {
   const { id } = req.params;
   console.log(id);
   try {
-    const profile = await Profile.findByPk(id);
+    const profile = await Profile.findByPk(id, {
+      include: [
+        {
+          model: Trip,
+          as: "trips",
+        },
+      ],
+    });
     if (profile) {
       res.json(profile);
     } else {
