@@ -1,7 +1,6 @@
 import { Profile, Trip } from "../db/models";
 export const create = (req, res, next) => {
   try {
-    console.log("Hello", req.user.id);
     // get the profile
     req.body.profileId = req.user.profile.id;
     res.image = req.image;

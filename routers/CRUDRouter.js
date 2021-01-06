@@ -18,7 +18,6 @@ class CRUDRouter extends express.Router {
       "/",
       options?.listMW ?? next,
       (req, res, next) => {
-        console.log("Hello,?");
         next();
       },
       crudController.list

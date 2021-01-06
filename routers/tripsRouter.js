@@ -15,6 +15,13 @@ const signInPassportMiddleware = passport.authenticate("jwt", {
 });
 
 router.use(
+  new CRUDRouter(new CRUDController(Trip, "trip"), {
+    createMW: [signInPassportMiddleware, upload.single("image")],
+    updateMW: [signInPassportMiddleware],
+  })
+);
+
+router.use(
   new CRUDRouter(new CRUDController(Trip, "trip", listTripsOptions), {
     createMW: [signInPassportMiddleware, upload.single("image"), create],
     destroyMW: [signInPassportMiddleware],

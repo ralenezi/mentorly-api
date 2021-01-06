@@ -2,7 +2,7 @@ const { User, Profile } = require("../db/models");
 const { hashPassword } = require("../helpers/authentication");
 const JWT = require("jsonwebtoken");
 const { JWT_EXPIRATION_DATE, JWT_SECRET } = require("../config/keys");
-exports.createUser = async (req, res, next) => {
+export const createUser = async (req, res, next) => {
   try {
     const hashedPassword = hashPassword(req.body.password);
     req.body.password = hashedPassword;
@@ -14,11 +14,13 @@ exports.createUser = async (req, res, next) => {
 
     res.status(201).json(tokenObject(user));
   } catch (error) {
-    next(error);
+    console.log("I AM SIGN UP NEXT", error);
+    next(new Error("ERROR"));
+    res.status(400).json({ message: "Invalid form" });
   }
 };
 
-exports.signIn = async (req, res, next) => {
+export const signIn = async (req, res, next) => {
   try {
     res.json({ message: "You are logged in!", ...tokenObject(req.user) });
   } catch (error) {

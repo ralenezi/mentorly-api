@@ -1,9 +1,10 @@
 // Error handler
-exports.errorMiddleware = (error, req, res, next) => {
-  res.status(error.status || 500);
-  res.json({ message: error.message || "Internal server error!" });
+
+export const errorMiddleware = (err, req, res, next) => {
+  res.status(err.status || 500);
+  res.json({ message: err.message || "Internal server error!" });
 };
 
-exports.notFoundMiddleware = (req, res, next) => {
-  res.status(404).json({ message: "Path not found!" });
+export const notFoundMiddleware = (req, res, next) => {
+  res.status(404).json({ message: "Path is not found!" });
 };
