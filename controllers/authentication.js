@@ -15,8 +15,7 @@ export const createUser = async (req, res, next) => {
     res.status(201).json(tokenObject(user));
   } catch (error) {
     console.log("I AM SIGN UP NEXT", error);
-    next(new Error("ERROR"));
-    res.status(400).json({ message: "Invalid form" });
+    next(error);
   }
 };
 
