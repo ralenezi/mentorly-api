@@ -1,7 +1,7 @@
 # Mentorly API
 CODED FS - CAPSTONE PROJECT 
 
-## COllborators 
+## Collborators 
 - Omar Alibrahim 
 - Rahaf Alenzi
 - Moudhi Albannai
