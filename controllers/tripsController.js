@@ -1,3 +1,4 @@
+/*
 import { Profile, Trip } from "../db/models";
 export const create = (req, res, next) => {
   try {
@@ -42,3 +43,4 @@ export const getSingleTrip = async (req, res, next) => {
     next(error);
   }
 };
+*/

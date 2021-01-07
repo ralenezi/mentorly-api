@@ -1,13 +1,9 @@
 module.exports = (sequelize, DataTypes) => {
   const Student = sequelize.define("Student", {
-    fullName: DataTypes.STRING,
-    bio: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
-    image: DataTypes.STRING,
-    email: DataTypes.STRING,
-    github: DataTypes.STRING,
+    grade: DataTypes.STRING,
+    schoolName: DataTypes.STRING,
+    schoolType: DataTypes.STRING,
+    device: DataTypes.STRING,
   });
 
   return Student;

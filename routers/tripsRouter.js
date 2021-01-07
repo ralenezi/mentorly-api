@@ -1,3 +1,4 @@
+/*
 import { create, listTripsOptions } from "../controllers/tripsController";
 
 import CRUDController from "../controllers/CRUDController";
@@ -32,3 +33,4 @@ router.use(
 router.get("/:id", getSingleTrip);
 
 export default router;
+*/
