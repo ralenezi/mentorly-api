@@ -1,15 +1,15 @@
-import { Profile, User } from "../db/models";
+import { Profile, User } from "../../db/models";
 import {
   getSingleProfile,
   getTripsFromProfile,
   updateProfile,
-} from "../controllers/profileController";
+} from "./profile.controller";
 
-import CRUDController from "../controllers/CRUDController";
-import CRUDRouter from "./CRUDRouter";
+import CRUDController from "../../crud/crud.controller";
+import CRUDRouter from "../../crud/crud.router";
 import express from "express";
 import passport from "passport";
-import upload from "../middleware/multer";
+import upload from "../../middleware/multer";
 
 const router = express.Router();
 const signInPassportMiddleware = passport.authenticate("jwt", {

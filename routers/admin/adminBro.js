@@ -3,7 +3,7 @@ const AdminBroSequelize = require("@admin-bro/sequelize");
 const AdminBroExpress = require("@admin-bro/express");
 
 // Database
-const db = require("../db/models");
+import db from "../../db/models";
 AdminBro.registerAdapter(AdminBroSequelize);
 
 const adminBro = new AdminBro({

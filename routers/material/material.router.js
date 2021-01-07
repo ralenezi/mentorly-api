@@ -1,7 +1,7 @@
 import { isMentor, isSignedIn } from "../../middleware/permissions";
 
-import CRUDController from "../../controllers/CRUDController";
-import CRUDRouter from "../CRUDRouter";
+import CRUDController from "../../crud/crud.controller";
+import CRUDRouter from "../../crud/crud.router";
 import { Lecture } from "../../db/models";
 import { Material } from "../../db/models";
 import express from "express";

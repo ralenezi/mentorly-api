@@ -1,19 +1,17 @@
-import lectureRouter from './material/lectureRouter'
-import materialRouter from './material/materialRouter'
-import CRUDController from "../controllers/CRUDController";
-import CRUDRouter from "./CRUDRouter";
-import adminBroRoute from "./adminBro";
-import authRouter from "./authentication";
+import adminBroRoute from "./admin/adminBro";
+import authRouter from "./auth/auth.router";
 import express from "express";
-import profileRouter from "./profileRouter";
-import studentsRouter from "./studentRouter";
+import lectureRouter from "./material/lecture.router";
+import materialRouter from "./material/material.router";
+import profileRouter from "./profile/profile.router";
+import studentsRouter from "./student/student.router";
 const routers = express.Router();
 
 routers.use(authRouter);
 routers.use("/profile", profileRouter);
 routers.use("/admin", adminBroRoute);
 routers.use("/students", studentsRouter);
-routers.use("/lectures", lectureRouter)
-routers.use("/material", materialRouter)
+routers.use("/lectures", lectureRouter);
+routers.use("/material", materialRouter);
 
-export default routers
+export default routers;

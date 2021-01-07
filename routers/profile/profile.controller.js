@@ -1,4 +1,4 @@
-import { Profile, Trip } from "../db/models";
+import { Profile, Trip } from "../../db/models";
 export const updateProfile = async (req, res, next) => {
   console.log("________\n\n\n\n", req.user.profileId);
   const profile = await Profile.findOne({

@@ -1,13 +1,12 @@
-/*
-import { create, listTripsOptions } from "../controllers/tripsController";
+import { create, listTripsOptions } from "./trips.controller";
 
-import CRUDController from "../controllers/CRUDController";
-import CRUDRouter from "./CRUDRouter";
-import { Trip } from "../db/models";
+import CRUDController from "../../crud/crud.controller";
+import CRUDRouter from "../../crud/crud.router";
+import { Trip } from "../../db/models";
 import express from "express";
-import { getSingleTrip } from "../controllers/tripsController";
+import { getSingleTrip } from "./trips.controller";
 import passport from "passport";
-import upload from "../middleware/multer";
+import upload from "../../middleware/multer";
 
 const router = express.Router();
 
@@ -33,4 +32,3 @@ router.use(
 router.get("/:id", getSingleTrip);
 
 export default router;
-*/

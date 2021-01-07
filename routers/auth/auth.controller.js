@@ -1,7 +1,7 @@
-const { User, Profile, Student, Mentor } = require("../db/models");
-const { hashPassword } = require("../helpers/authentication");
+const { User, Profile, Student, Mentor } = require("../../db/models");
+const { hashPassword } = require("./auth.helper");
 const JWT = require("jsonwebtoken");
-const { JWT_EXPIRATION_DATE, JWT_SECRET } = require("../config/keys");
+const { JWT_EXPIRATION_DATE, JWT_SECRET } = require("../../config/keys");
 
 export const newUserQuery = [
   {

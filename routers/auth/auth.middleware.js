@@ -1,4 +1,4 @@
-const { Author } = require("../db/models");
+const { Author } = require("../../db/models");
 
 const findAuthor = async (authorId, next) => {
   try {
