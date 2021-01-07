@@ -1,6 +1,6 @@
 {
   "development": {
-    "username": "postgres",
+    "username": "rahaf",
     "password": null,
     "database": "boque_db",
     "host": "127.0.0.1",
