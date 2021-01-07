@@ -65,10 +65,14 @@ db.Profile.belongsTo(db.User, { foreignKey: "userId" });
 
 // Students + Mentors
 // Profile >-----< Student
-db.Profile.hasOne(db.Student, { foreignKey: "profileId" });
+db.Profile.hasOne(db.Student, {
+  foreignKey: { name: "profileId", allowNull: false },
+  as: "student",
+});
 db.Student.belongsTo(db.Profile, { as: "profile", foreignKey: "profileId" });
 // Profile >-----< Mentor
 db.Profile.hasOne(db.Mentor, {
+  as: "mentor",
   foreignKey: { name: "profileId", allowNull: false },
 });
 db.Mentor.belongsTo(db.Profile, {

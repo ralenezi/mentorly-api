@@ -2,7 +2,6 @@ const { Sequelize } = require("sequelize");
 
 module.exports = (sequelize, DataTypes) => {
   const Profile = sequelize.define("Profile", {
-    bio: DataTypes.STRING,
     image: {
       type: Sequelize.STRING,
       allowNull: true,
@@ -37,6 +36,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     enrolled: DataTypes.BOOLEAN,
     civilId: DataTypes.STRING,
+    isMentor: DataTypes.BOOLEAN,
   });
 
   return Profile;
