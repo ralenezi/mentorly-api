@@ -48,15 +48,42 @@ db.Sequelize = Sequelize
  * @param {object} options - alter: true or force true. By default it's `alter: true`
  */
 
-// User ----> Order
-db.Profile.hasMany(db.Trip, { as: 'trips', foreignKey: 'profileId' })
-db.Trip.belongsTo(db.Profile, { as: 'profile' })
-// User >----< Profile
-db.User.hasOne(db.Profile, { as: 'profile', foreignKey: 'userId' })
-db.Profile.belongsTo(db.User, { foreignKey: 'userId' })
 
-// Material ----> Lecture
+/*
+    Profiles and groups relationships 
+
+    User ---> Profile  
+                --> Student
+                --> Mentor
+ */
+
+// User >----< Profile
+db.User.hasOne(db.Profile, {
+  as: "profile",
+  foreignKey: { name: "userId", allowNull: false },
+});
+db.Profile.belongsTo(db.User, { foreignKey: "userId" });
+
+// Students + Mentors
+// Profile >-----< Student
+db.Profile.hasOne(db.Student, { foreignKey: "profileId" });
+db.Student.belongsTo(db.Profile, { as: "profile", foreignKey: "profileId" });
+// Profile >-----< Mentor
+db.Profile.hasOne(db.Mentor, {
+  foreignKey: { name: "profileId", allowNull: false },
+});
+db.Mentor.belongsTo(db.Profile, {
+  as: "mentor",
+  foreignKey: { name: "profileId", allowNull: false },
+});
+// Track >-----< Mentor
+db.Track.hasMany(db.Mentor, { foreignKey: "trackId" });
+db.Mentor.belongsTo(db.Track, { foreignKey: "trackId" });
+
+// Lecture <------ Material 
 db.Lecture.hasMany(db.Material, { as: 'material', foreignKey: 'lectureId' })
 db.Material.belongsTo(db.Lecture, { as: 'lecture' })
 
-module.exports = db
+
+module.exports = db;
+
