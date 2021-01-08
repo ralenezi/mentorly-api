@@ -4,7 +4,7 @@ import { Lecture } from "../../db/models";
 import { Material } from "../../db/models";
 import express from "express";
 
-const listOptions = {
+const listAllOptions = {
   include: [
     {
       model: Material,
@@ -15,9 +15,8 @@ const listOptions = {
 };
 
 const router = express.Router();
-const routers = new CrudRouter(
-  new CrudController(Lecture, "lecture", listOptions)
-);
+const controller = new CrudController(Lecture, "lecture", listAllOptions);
+const routers = new CrudRouter(controller);
 router.use(routers);
 
 export default router;

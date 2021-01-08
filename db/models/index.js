@@ -54,6 +54,11 @@ db.Sequelize = Sequelize;
     User ---> Profile  
                 --> Student
                 --> Mentor
+
+    Material and lectures
+
+    Material -->> Lecture -->> Track
+
  */
 
 // User >----< Profile
@@ -80,11 +85,15 @@ db.Mentor.belongsTo(db.Profile, {
   foreignKey: { name: "profileId", allowNull: false },
 });
 // Track >-----< Mentor
-db.Track.hasMany(db.Mentor, { foreignKey: "trackId", as: "mentor" });
+db.Track.hasMany(db.Mentor, { foreignKey: "trackId", as: "mentors" });
 db.Mentor.belongsTo(db.Track, { foreignKey: "trackId", as: "track" });
 
+// Track >-----< Lecture
+db.Track.hasMany(db.Lecture, { foreignKey: "trackId", as: "lectures" });
+db.Lecture.belongsTo(db.Track, { foreignKey: "trackId", as: "track" });
+
 // Lecture <------ Material
-db.Lecture.hasMany(db.Material, { as: "material", foreignKey: "lectureId" });
+db.Lecture.hasMany(db.Material, { as: "materials", foreignKey: "lectureId" });
 db.Material.belongsTo(db.Lecture, { as: "lecture" });
 
 module.exports = db;

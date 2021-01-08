@@ -4,7 +4,9 @@ export const updateProfile = async (req, res, next) => {
   const profile = await Profile.findOne({
     where: { userId: req.user.id },
   });
-  req.id = profile.id;
+  // crud controller takes an id to update something
+  // we are kinda hacking around by passing
+  req.params.id = profile.id;
   next();
 };
 
@@ -45,10 +47,12 @@ export const getSingleProfile = async (req, res, next) => {
 };
 
 export const getMyProfile = async (req, res, next) => {
-  const { id } = req.params;
+  const { id } = req.user;
+  console.log("USER: ", req.user);
   console.log(id);
   try {
-    const profile = await Profile.findByPk(id, {
+    const profile = await Profile.findOne({
+      where: { userId: req.user.id },
       attributes: ["id", "image", "name", "bio"],
       include: [
         {
@@ -88,6 +92,30 @@ export const getTripsFromProfile = async (req, res, next) => {
       },
     });
     res.json(trips);
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const getProfilesFromIos = async (req, res, next) => {
+  try {
+    const profile = await Profile.findOne({
+      include: [
+        {
+          model: Mentor,
+          as: "mentor",
+          include: [
+            {
+              model: Track,
+              as: "track",
+              where: {
+                name: "iOS",
+              },
+            },
+          ],
+        },
+      ],
+    });
   } catch (error) {
     next(error);
   }
