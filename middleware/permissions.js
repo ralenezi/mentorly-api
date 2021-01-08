@@ -5,15 +5,23 @@ export const isSignedIn = passport.authenticate("jwt", {
 });
 
 export const isMentor = (req, res, next) => {
-  console.log(req.user);
-  if (req.user.mentor != null) {
-    next();
-  } else {
-    next(
-      new Error(
-        "You should be signed in as a mentor in order to access this page!"
-      )
+  try {
+    console.log(req.user);
+    if (req.user.mentor != null) {
+      next();
+    } else {
+      next(
+        new Error(
+          "You should be signed in as a mentor in order to access this page!"
+        )
+      );
+    }
+  } catch (error) {
+    let unauthorized = new Error(
+      "You should be signed in as a mentor to access this endpoint!"
     );
+    unauthorized.status = 401;
+    next(unauthorized);
   }
 };
 

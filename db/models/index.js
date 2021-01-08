@@ -88,6 +88,10 @@ db.Mentor.belongsTo(db.Profile, {
 db.Track.hasMany(db.Mentor, { foreignKey: "trackId", as: "mentors" });
 db.Mentor.belongsTo(db.Track, { foreignKey: "trackId", as: "track" });
 
+// Track >-----< Student
+db.Track.hasMany(db.Student, { foreignKey: "trackId", as: "students" });
+db.Student.belongsTo(db.Track, { foreignKey: "trackId", as: "track" });
+
 // Track >-----< Lecture
 db.Track.hasMany(db.Lecture, { foreignKey: "trackId", as: "lectures" });
 db.Lecture.belongsTo(db.Track, { foreignKey: "trackId", as: "track" });
@@ -95,5 +99,67 @@ db.Lecture.belongsTo(db.Track, { foreignKey: "trackId", as: "track" });
 // Lecture <------ Material
 db.Lecture.hasMany(db.Material, { as: "materials", foreignKey: "lectureId" });
 db.Material.belongsTo(db.Lecture, { as: "lecture" });
+
+// Mentor <------ Student
+db.Mentor.hasMany(db.Student, { as: "students", foreignKey: "mentorId" });
+db.Student.belongsTo(db.Mentor, { as: "mentor" });
+
+// Cohort <------> Track
+// db.Track.belongsToMany(db.Cohort, {
+//   as: "tracks",
+//   foreignKey: "trackId",
+//   through: db.CohortTrack,
+// });
+// db.Cohort.belongsToMany(db.Track, {
+//   as: "cohorts",
+//   foreignKey: "cohortId",
+//   through: db.CohortTrack,
+// });
+
+// db.CohortTrack.hasMany(db.Student);
+// db.Student.belongsTo(db.CohortTrack);
+
+// Cohort <------> Student
+
+// Cohort <------> Lecture
+
+/*
+  Tracks
+ 1.   ↪ Tasks 
+ 2.       ↪ Submissions 
+ 3.            ↪ Student
+                         
+*/
+
+// 1. Track has many tasks
+db.Track.hasMany(db.Task, {
+  foreignKey: "trackId",
+  as: "tasks",
+});
+db.Task.belongsTo(db.Track, {
+  foreignKey: "trackId",
+  as: "track",
+});
+
+// 2. Task has many submissions
+db.Task.hasMany(db.Submission, {
+  foreignKey: { name: "taskId", allowNull: false },
+  as: "submissions",
+});
+db.Submission.belongsTo(db.Task, {
+  allowNull: false,
+  foreignKey: "taskId",
+  as: "task",
+});
+
+//3 . Student has multiple submissions. a submission belongs to one student
+db.Student.hasMany(db.Submission, {
+  foreignKey: { name: "studentId", allowNull: false },
+  as: "submissions",
+});
+db.Submission.belongsTo(db.Student, {
+  foreignKey: "studentId",
+  as: "student",
+});
 
 module.exports = db;

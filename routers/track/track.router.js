@@ -1,8 +1,11 @@
+import { disabled, isMentor, isSignedIn } from "../../middleware/permissions";
+
 import CrudController from "../../crud/crud.controller";
 import CrudRouter from "../../crud/crud.router";
 import { Track } from "../../db/models";
-import { disabled } from "../../middleware/permissions";
 import express from "express";
+import { getListOfStudentFromTrack } from "./track.controller";
+import tasksRouter from "../tasks/tasks.router";
 
 const listOptions = {
   attributes: {
@@ -18,5 +21,11 @@ const routers = new CrudRouter(controller, {
   destroyMW: [disabled],
 });
 router.use(routers);
-
+router.get(
+  "/:trackId/students",
+  isSignedIn,
+  isMentor,
+  getListOfStudentFromTrack
+);
+router.use(tasksRouter);
 export default router;
