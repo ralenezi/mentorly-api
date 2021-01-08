@@ -1,4 +1,4 @@
-class CRUDController {
+class CrudController {
   constructor(ITEM, item, listOptions = {}) {
     this.ITEM = ITEM; // Model used for crud methods
     this.item = item; // String represents the name of the model
@@ -65,4 +65,4 @@ class CRUDController {
   };
 }
 
-module.exports = CRUDController;
+module.exports = CrudController;

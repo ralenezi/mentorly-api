@@ -28,3 +28,7 @@ export const isStudent = (req, res, next) => {
     );
   }
 };
+
+export const disabled = (req, res, next) => {
+  res.status(404).json({ message: "path not found!" });
+};

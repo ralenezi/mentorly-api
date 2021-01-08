@@ -55,6 +55,7 @@ const validateSignUpRequest = (body) => {
 
 export const createUser = async (req, res, next) => {
   try {
+    const { userType } = req.body;
     const hashedPassword = hashPassword(req.body.password);
     req.body.password = hashedPassword;
     req.body.email = req.body.username;
@@ -67,16 +68,16 @@ export const createUser = async (req, res, next) => {
     // Assosiate User to Profile
     const profile = await Profile.create({ userId: user.id, ...req.body });
     const mentorOrStudent = await createStudentOrMentor(
-      req.body.userType,
+      userType,
       req.body,
       profile.id
     );
     const user2 = await User.findByPk(user.id, {
       include: newUserQuery,
     });
-    res
-      .status(201)
-      .json(tokenObject({ ...user2, userType: req.body.userType }));
+    const jwt = tokenObject(user2, userType);
+    console.log("User fetched: ", jwt);
+    res.status(201).json(jwt);
   } catch (error) {
     console.log("I AM SIGN UP NEXT", error);
     next(error);
@@ -84,8 +85,9 @@ export const createUser = async (req, res, next) => {
 };
 
 export const signIn = async (req, res, next) => {
+  console.log("User signed in ", req.user);
   try {
-    res.json({ message: "You are logged in!", ...tokenObject(req.user) });
+    res.json({ ...tokenObject(req.user) });
   } catch (error) {
     next(error);
   }

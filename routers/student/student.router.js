@@ -1,5 +1,5 @@
-import CRUDController from "../../crud/crud.controller";
-import CRUDRouter from "../../crud/crud.router";
+import CrudController from "../../crud/crud.controller";
+import CrudRouter from "../../crud/crud.router";
 import { Student } from "../../db/models";
 import express from "express";
 import passport from "passport";
@@ -13,8 +13,8 @@ const signInPassportMiddleware = passport.authenticate("jwt", {
   session: false,
 });
 
-const controllers = new CRUDController(Student, "student", listOptions);
-const routers = new CRUDRouter(controllers, {
+const controllers = new CrudController(Student, "student", listOptions);
+const routers = new CrudRouter(controllers, {
   createMW: [signInPassportMiddleware, upload.single("image")],
 });
 

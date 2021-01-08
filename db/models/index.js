@@ -61,7 +61,7 @@ db.User.hasOne(db.Profile, {
   as: "profile",
   foreignKey: { name: "userId", allowNull: false },
 });
-db.Profile.belongsTo(db.User, { foreignKey: "userId" });
+db.Profile.belongsTo(db.User, { as: "user", foreignKey: "userId" });
 
 // Students + Mentors
 // Profile >-----< Student
@@ -80,8 +80,8 @@ db.Mentor.belongsTo(db.Profile, {
   foreignKey: { name: "profileId", allowNull: false },
 });
 // Track >-----< Mentor
-db.Track.hasMany(db.Mentor, { foreignKey: "trackId" });
-db.Mentor.belongsTo(db.Track, { foreignKey: "trackId" });
+db.Track.hasMany(db.Mentor, { foreignKey: "trackId", as: "mentor" });
+db.Mentor.belongsTo(db.Track, { foreignKey: "trackId", as: "track" });
 
 // Lecture <------ Material
 db.Lecture.hasMany(db.Material, { as: "material", foreignKey: "lectureId" });

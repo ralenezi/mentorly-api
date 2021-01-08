@@ -6,7 +6,7 @@ const defaultOptions = {
   updateMW: [],
   destroyMW: [],
 };
-class CRUDRouter extends express.Router {
+class CrudRouter extends express.Router {
   constructor(crudController, options = defaultOptions) {
     super();
     function next(req, res, next) {
@@ -27,4 +27,4 @@ class CRUDRouter extends express.Router {
     this.delete("/:id", options?.destroyMW ?? next, crudController.destory);
   }
 }
-module.exports = CRUDRouter;
+module.exports = CrudRouter;

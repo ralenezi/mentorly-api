@@ -1,7 +1,7 @@
 import { create, listTripsOptions } from "./trips.controller";
 
-import CRUDController from "../../crud/crud.controller";
-import CRUDRouter from "../../crud/crud.router";
+import CrudController from "../../crud/crud.controller";
+import CrudRouter from "../../crud/crud.router";
 import { Trip } from "../../db/models";
 import express from "express";
 import { getSingleTrip } from "./trips.controller";
@@ -15,14 +15,14 @@ const signInPassportMiddleware = passport.authenticate("jwt", {
 });
 
 router.use(
-  new CRUDRouter(new CRUDController(Trip, "trip"), {
+  new CrudRouter(new CrudController(Trip, "trip"), {
     createMW: [signInPassportMiddleware, upload.single("image")],
     updateMW: [signInPassportMiddleware],
   })
 );
 
 router.use(
-  new CRUDRouter(new CRUDController(Trip, "trip", listTripsOptions), {
+  new CrudRouter(new CrudController(Trip, "trip", listTripsOptions), {
     createMW: [signInPassportMiddleware, upload.single("image"), create],
     destroyMW: [signInPassportMiddleware],
     updateMW: [signInPassportMiddleware],
