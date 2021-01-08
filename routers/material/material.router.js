@@ -5,6 +5,7 @@ import CrudRouter from "../../crud/crud.router";
 import { Lecture } from "../../db/models";
 import { Material } from "../../db/models";
 import express from "express";
+import { listLecturesFromTrack } from "./material.controller";
 
 const listOptions = {
   include: [
@@ -27,5 +28,7 @@ const routers = new CrudRouter(
   }
 );
 router.use(routers);
+// manual controllers
+router.get("/:track", listLecturesFromTrack);
 
 export default router;
