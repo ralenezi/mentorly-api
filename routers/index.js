@@ -5,6 +5,7 @@ import lectureRouter from "./material/lecture.router";
 import materialRouter from "./material/material.router";
 import profileRouter from "./profile/profile.router";
 import studentsRouter from "./student/student.router";
+import trackRouter from "./track/track.router";
 const routers = express.Router();
 
 routers.use(authRouter);
@@ -13,5 +14,5 @@ routers.use("/admin", adminBroRoute);
 routers.use("/students", studentsRouter);
 routers.use("/lectures", lectureRouter);
 routers.use("/material", materialRouter);
-
+routers.use("/track", trackRouter);
 export default routers;
