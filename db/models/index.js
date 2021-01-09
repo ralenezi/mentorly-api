@@ -155,6 +155,7 @@ db.Submission.belongsTo(db.Task, {
 //3 . Student has multiple submissions. a submission belongs to one student
 db.Student.hasMany(db.Submission, {
   foreignKey: { name: "studentId", allowNull: false },
+  unique: true,
   as: "submissions",
 });
 db.Submission.belongsTo(db.Student, {
