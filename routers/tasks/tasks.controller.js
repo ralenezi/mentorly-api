@@ -1,4 +1,4 @@
-import { Submission, Task, Track } from "../../db/models";
+import { Student, Submission, Task, Track } from "../../db/models";
 
 // This should show tasks for cohort_track
 export const getTasksForTrack = async (req, res, next) => {
@@ -59,12 +59,18 @@ export const getStudentsSubmissionForTask = async (req, res, next) => {
 };
 export const getTasksWithSubmissionsForTrack = async (req, res, next) => {
   try {
-    const tasks = await Task.findAll({
-      where: { trackId: req.body.trackId },
+    const tasks = await Track.findByPk(req.body.trackId, {
       include: [
         {
-          model: Submission,
-          as: "submissions",
+          model: Task,
+          as: "tasks",
+          include: [
+            {
+              model: Student,
+              attributes: ["id"],
+            },
+          ],
+          // through: { attributes: ["createdAt"] },
         },
       ],
     });

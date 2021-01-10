@@ -8,6 +8,7 @@ class CrudController {
   create = async (req, res, next) => {
     try {
       const newItem = await this.ITEM.create(req.body);
+      console.log(`🆕 New ${this.item} has been created!`);
       res.status(201).json(newItem);
     } catch (error) {
       next(error);
@@ -17,7 +18,7 @@ class CrudController {
   // UPDATE
   update = async (req, res, next) => {
     const { id } = req.params;
-    console.log(`Got ${this.item} id:`, id);
+    console.log(`🆕 Got ${this.item} id:`, id);
     try {
       const foundItem = await this.ITEM.findByPk(id);
       if (foundItem) {
