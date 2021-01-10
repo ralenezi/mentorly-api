@@ -128,6 +128,8 @@ db.Student.belongsTo(db.Mentor, { as: "mentor" });
  1.   ↪ Tasks 
  2.       ↪ Submissions 
  3.            ↪ Student
+
+ Student has many Tasks through Submission
                          
 */
 
@@ -141,26 +143,35 @@ db.Task.belongsTo(db.Track, {
   as: "track",
 });
 
-// 2. Task has many submissions
-db.Task.hasMany(db.Submission, {
-  foreignKey: { name: "taskId", allowNull: false },
-  as: "submissions",
+db.Student.belongsToMany(db.Task, {
+  foreignKey: "studentId",
+  through: { model: db.Submission },
 });
-db.Submission.belongsTo(db.Task, {
-  allowNull: false,
+db.Task.belongsToMany(db.Student, {
   foreignKey: "taskId",
-  as: "task",
+  through: { model: db.Submission },
 });
 
-//3 . Student has multiple submissions. a submission belongs to one student
-db.Student.hasMany(db.Submission, {
-  foreignKey: { name: "studentId", allowNull: false },
-  unique: true,
-  as: "submissions",
-});
-db.Submission.belongsTo(db.Student, {
-  foreignKey: "studentId",
-  as: "student",
-});
+// // 2. Task has many submissions
+// db.Task.hasMany(db.Submission, {
+//   foreignKey: { name: "taskId", allowNull: false },
+//   as: "submissions",
+// });
+// db.Submission.belongsTo(db.Task, {
+//   allowNull: false,
+//   foreignKey: "taskId",
+//   as: "task",
+// });
+
+// //3 . Student has multiple submissions. a submission belongs to one student
+// db.Student.hasMany(db.Submission, {
+//   foreignKey: { name: "studentId", allowNull: false },
+//   unique: true,
+//   as: "submissions",
+// });
+// db.Submission.belongsTo(db.Student, {
+//   foreignKey: "studentId",
+//   as: "student",
+// });
 
 module.exports = db;
