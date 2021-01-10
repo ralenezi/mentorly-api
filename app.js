@@ -12,6 +12,6 @@ app.use(errorMiddleware);
 
 connect(async () => {
   app.listen(8185, () => {
-    console.log("App is running!");
+    console.log("😎 App is running fine!");
   });
 });

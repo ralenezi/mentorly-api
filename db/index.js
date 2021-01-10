@@ -1,5 +1,5 @@
 import db from "./models";
-export const connect = async (cb, options = { alter: true }) => {
+export const connect = async (cb, options = { force: true }) => {
   try {
     await db.sequelize.sync(options);
     console.log("Connection to the database successful!");
