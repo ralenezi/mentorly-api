@@ -31,7 +31,7 @@ export const getSingleProfile = async (req, res, next) => {
           model: Mentor,
           as: "mentor",
           attributes: ["id", "status"],
-          include: [{ model: Track, as: "track", attributes: ["name"] }],
+          include: [{ model: Track, as: "track", attributes: ["name", "id"] }],
         },
       ],
     });
