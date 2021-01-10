@@ -1,9 +1,8 @@
 module.exports = (sequelize, DataTypes) => {
-  const Lecture = sequelize.define('Lecture', {
+  const Lecture = sequelize.define("Lecture", {
     title: { type: DataTypes.STRING, allowNull: false },
-    startDate: DataTypes.DATEONLY,
-    endDate: DataTypes.DATEONLY,
-  })
+    date: DataTypes.DATE,
+  });
 
-  return Lecture
-}
+  return Lecture;
+};

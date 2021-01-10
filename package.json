@@ -20,6 +20,7 @@
     "express": "^4.17.1",
     "express-formidable": "^1.2.0",
     "jsonwebtoken": "^8.5.1",
+    "jwt-decode": "^3.1.2",
     "multer": "^1.4.2",
     "mysql2": "^2.2.5",
     "passport": "^0.4.1",
@@ -36,5 +37,11 @@
   },
   "scripts": {
     "start": "nodemon --exec babel-node app.js"
+  },
+  "prettier": {
+    "jsxBracketSameLine": true,
+    "jsxSingleQuote": false,
+    "singleQuote": false,
+    "semi": true
   }
 }
