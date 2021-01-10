@@ -97,7 +97,7 @@ db.Track.hasMany(db.Lecture, { foreignKey: "trackId", as: "lectures" });
 db.Lecture.belongsTo(db.Track, { foreignKey: "trackId", as: "track" });
 
 // Lecture <------ Material
-db.Lecture.hasMany(db.Material, { as: "materials", foreignKey: "lectureId" });
+db.Lecture.hasMany(db.Material, { as: "material", foreignKey: "lectureId" });
 db.Material.belongsTo(db.Lecture, { as: "lecture" });
 
 // Mentor <------ Student
