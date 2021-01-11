@@ -71,7 +71,7 @@ export const getStudentProgress = async (req, res, next) => {
 };
 // TODO: THIS SHOULD RETURN AN ARRAY OF STUDENTS TASKS
 // YOU WILL HAVE TO ZIP TRACK TO STUDENTS
-export const getStudentProgress = async (req, res, next) => {
+export const getStudentsProgress = async (req, res, next) => {
   try {
     const studentId = req.params.trackId;
     const student = await Student.findAll({
