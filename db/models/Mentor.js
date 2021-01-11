@@ -3,6 +3,7 @@ module.exports = (sequelize, DataTypes) => {
     bankInformation: DataTypes.STRING,
     cv: DataTypes.STRING,
     status: DataTypes.STRING,
+    officeHours: DataTypes.STRING,
   });
 
   return Mentor;
