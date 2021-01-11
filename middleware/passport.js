@@ -30,19 +30,29 @@ exports.jwtStrategy = new JWTStrategy(
     secretOrKey: JWT_SECRET,
   },
   async (jwtPayload, done) => {
-    const secondsLeft = (jwtPayload.exp - Date.now()) / 1000;
-    console.log(`Seconds left on this session: ${secondsLeft}s`);
-    // TODO: Fix me here, it's crashing when the session is expired!
     try {
+      // 1. Make sure the user exists!
+      const user = await User.findOne({ where: { email: jwtPayload.email } });
+      // console.log("USER:", user);
+      if (!user) {
+        let error = new Error(
+          `You're claiming you have an account ${jwtPayload.email}, but this email doesn't exist!`
+        );
+        error.status = 401;
+        throw error;
+      }
+      const secondsLeft = (jwtPayload.exp - Date.now()) / 1000;
+      console.log(`Seconds left on this session: ${secondsLeft}s`);
+      // TODO: Fix me here, it's crashing when the session is expired!
       if (jwtPayload.exp < Date.now()) {
         let error = new Error("Token is expired");
         error.status = 401;
         // return done(error); // status 401
         throw error;
       }
-      const user = jwtPayload;
+
       // console.log("FETCHED MODEL: USER, ", user.profile);
-      done(null, user);
+      done(null, jwtPayload);
     } catch (error) {
       done(error);
     }
