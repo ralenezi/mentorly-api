@@ -174,4 +174,14 @@ db.Task.belongsToMany(db.Student, {
 //   as: "student",
 // });
 
+// Student <--- Comment
+db.Student.hasMany(db.Comment, {
+  foreignKey: { name: "studentId", allowNull: false },
+  as: "comments",
+});
+db.Comment.belongsTo(db.Student, {
+  foreignKey: { name: "studentId", allowNull: false },
+  as: "student",
+});
+
 module.exports = db;

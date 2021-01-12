@@ -8,6 +8,7 @@ import studentsRouter from "./student/student.router";
 import submissionRouter from "./submission/submission.router";
 import tasksRouter from "./tasks/tasks.router";
 import trackRouter from "./track/track.router";
+import router from "./auth/auth.router";
 const routers = express.Router();
 
 routers.use(authRouter);

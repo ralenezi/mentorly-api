@@ -3,6 +3,7 @@ import { Profile, Student, Task, Track, User } from "../../db/models";
 export const getStudentProgress = async (req, res, next) => {
   try {
     const studentId = req.params.studentId;
+    console.log("sids", studentId);
     const student = await Student.findByPk(studentId, {
       attributes: { exclude: ["updatedAt", "createdAt"] },
       //   raw: true,
