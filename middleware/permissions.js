@@ -8,6 +8,7 @@ export const isMentor = (req, res, next) => {
   try {
     console.log(req.user);
     if (req.user.mentor != null) {
+      req.mentorId = req.user.mentor.id;
       next();
     } else {
       next({

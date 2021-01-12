@@ -1,5 +1,5 @@
 import { Mentor, Student, Track } from "../../db/models";
-import { disabled, isSignedIn } from "../../middleware/permissions";
+import { disabled, isMentor, isSignedIn } from "../../middleware/permissions";
 import commentRouter from "./comment/comment.router";
 
 import express from "express";
@@ -8,8 +8,15 @@ import { injectUpdatedBy } from "./comment/comment.middleware";
 
 const router = express.Router();
 
+// router.post("/:studentId", injectUpdatedBy);
 router.get("/:studentId/", getStudentProgress);
-router.post("/:studentId/comments", injectUpdatedBy);
-router.use(commentRouter);
+router.use(
+  "/:studentId/comments",
+  isSignedIn,
+  isMentor,
+  injectUpdatedBy,
+  commentRouter
+);
+// router.use(commentRouter);
 
 export default router;

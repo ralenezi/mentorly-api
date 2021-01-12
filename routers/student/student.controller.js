@@ -1,4 +1,4 @@
-import { Profile, Student, Task, Track, User } from "../../db/models";
+import { Profile, Student, Task, Track, User, Comment } from "../../db/models";
 
 export const getStudentProgress = async (req, res, next) => {
   try {
@@ -6,8 +6,14 @@ export const getStudentProgress = async (req, res, next) => {
     console.log("sids", studentId);
     const student = await Student.findByPk(studentId, {
       attributes: { exclude: ["updatedAt", "createdAt"] },
-      //   raw: true,
+
       include: [
+        // COMMENTS
+        {
+          model: Comment,
+          as: "comments",
+          attributes: { exclude: ["studentId"] },
+        },
         {
           model: Profile,
           as: "profile",

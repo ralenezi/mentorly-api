@@ -12,12 +12,11 @@ import { injectUpdatedBy } from "./comment.middleware";
 
 const router = express.Router();
 router.use(
-  "00/:studentId/comments",
   new CrudRouter(new CrudController(Comment, "Comment"), {
     updateMW: [disabled],
-    createMW: [isSignedIn, isMentor, injectUpdatedBy],
-    destroyMW: [isSignedIn, isMentor],
-    listMW: [isSignedIn, isMentor, listNotes],
+    createMW: [],
+    destroyMW: [],
+    listMW: [listNotes],
   })
 );
 

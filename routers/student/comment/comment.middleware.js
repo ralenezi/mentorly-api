@@ -1,10 +1,8 @@
-import { transformFromAstSync } from "@babel/core";
-
 export const injectUpdatedBy = async (req, res, next) => {
   try {
-    req.body.studentId = req.params.studentId;
-    console.log("Request.PARAMS/STUDENTI", req.params);
-    // req.body.updatedBy = req.student.mentorId;
+    const { studentId } = req.params;
+    req.body.studentId = studentId;
+    req.body.updatedBy = req.mentorId;
     console.log("Request.mentorID/STUDENTI", req.mentorId);
     // req.body.updatedBy = req.student.mentorId;
 
