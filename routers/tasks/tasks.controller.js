@@ -11,9 +11,24 @@ export const getTasksForTrack = async (req, res, next) => {
     next(error);
   }
 };
+
 export const getTasksSubmissionsForTrack = async (req, res, next) => {
   try {
-    const { trackId, taskId } = req.params;
+    const { taskId } = req.params;
+    const submissions = await Submission.findAll({
+      where: {
+        taskId,
+        ...req.query,
+      },
+    });
+    res.json(submissions);
+  } catch (error) {
+    next(error);
+  }
+};
+export const getTasksSubmissionsForTrack_old = async (req, res, next) => {
+  try {
+    const { taskId } = req.params;
     const tasks = await Task.findByPk(taskId, {
       attributes: {
         exclude: ["createdAt", "updatedAt"],

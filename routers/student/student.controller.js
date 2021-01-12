@@ -1,5 +1,6 @@
 import { Profile, Student, Task, Track, User, Comment } from "../../db/models";
 
+// testing submission
 export const getStudentProgress = async (req, res, next) => {
   try {
     const studentId = req.params.studentId;
@@ -49,6 +50,8 @@ export const getStudentProgress = async (req, res, next) => {
       task.submission = task.Students[0]?.Submission;
       delete task.Students;
     });
+
+    // PROGRESS THING
     // res.json(tasksJSON);
     let weight = totalWeight(tasksJSON);
     let requiredWeight = totalRequiredWeight(tasksJSON);
@@ -76,6 +79,13 @@ export const getStudentProgress = async (req, res, next) => {
     next(error);
   }
 };
+
+export const testingStudnetsWithTasks = async (req, res, next) => {
+  const students = await Student.findAll({
+    include: Task,
+  });
+  res.json(students);
+};
 // TODO: THIS SHOULD RETURN AN ARRAY OF STUDENTS TASKS
 // YOU WILL HAVE TO ZIP TRACK TO STUDENTS
 export const getStudentsProgress = async (req, res, next) => {
@@ -101,6 +111,8 @@ export const getStudentsProgress = async (req, res, next) => {
         },
       ],
     });
+
+    // SELECT * FROM TASK, STUDENT WHERE .. GROUP BY STUDENTID
 
     const tasks = await Task.findAll({
       where: {

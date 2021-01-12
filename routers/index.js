@@ -11,7 +11,7 @@ import trackRouter from "./track/track.router";
 import router from "./auth/auth.router";
 const routers = express.Router();
 
-routers.use(authRouter);
+routers.use("/account", authRouter);
 routers.use("/profile", profileRouter);
 routers.use("/admin", adminBroRoute);
 routers.use("/students", studentsRouter);
