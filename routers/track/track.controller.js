@@ -1,4 +1,4 @@
-import { User, Student, Profile } from "../../db/models";
+import { Task, User, Student, Profile } from "../../db/models";
 export const getListOfStudentFromTrack = async (req, res, next) => {
   try {
     const { trackId } = req.params;
@@ -14,6 +14,7 @@ export const getListOfStudentFromTrack = async (req, res, next) => {
             attributes: ["email"],
           },
         },
+        Task,
       ],
     });
     res.json(students);

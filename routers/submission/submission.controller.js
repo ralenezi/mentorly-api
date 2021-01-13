@@ -17,8 +17,25 @@ export const updateSubmissionIfExists = async (req, res, next) => {
       res.status(202).json({ message: "Updated!", payload: submission });
     } else {
       const newSubmission = await Submission.create(req.body);
-      res.status(201).json(newSubmission);
+      res.status(201).json({ message: "Created!", payload: newSubmission });
     }
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const bulkUpdateSubmissions = async (req, res, next) => {
+  try {
+    Submission.bulkCreate(
+      [
+        { id: 1, status: "5arbooo6a", studentId: 1, taskId },
+        { id: 2, status: "5arboo6a", studentId: 1 },
+        { id: 3, status: "5arboo6a", studentId: 1 },
+        { id: 4, status: "5arboo6a", studentId: 1 },
+        { id: 5, status: "5arboo6a", studentId: 1 },
+      ],
+      { updateOnDuplicate: ["name"] }
+    );
   } catch (error) {
     next(error);
   }

@@ -13,7 +13,7 @@ export const getStudentProgress = async (req, res, next) => {
         {
           model: Comment,
           as: "comments",
-          attributes: { exclude: ["studentId"] },
+          // attributes: { exclude: ["studentId"] },
         },
         {
           model: Profile,
