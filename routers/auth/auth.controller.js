@@ -16,12 +16,12 @@ export const newUserQuery = [
       {
         model: Student,
         as: "student",
-        attributes: ["id"],
+        // attributes: ["id"],
       },
       {
         model: Mentor,
         as: "mentor",
-        attributes: ["id"],
+        // attributes: ["id"],
       },
     ],
   },
