@@ -42,7 +42,8 @@
   "scripts": {
     "start": "nodemon app.js",
     "erd": "sequelize-erd --source ./db/instance --destination ./erd.svg",
-    "deploy": "node app.js"
+    "deploy": "babel-node app.js",
+    "build": "babel app.js -d lib"
   },
   "prettier": {
     "jsxBracketSameLine": true,
