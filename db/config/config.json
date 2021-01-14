@@ -15,7 +15,6 @@
     "dialect": "mysql"
   },
   "production": {
-    "dialect": "sqlite",
-    "storage": "path/to/database.sqlite"
+    "use_env_variable": "DATABASE_URL"
   }
 }

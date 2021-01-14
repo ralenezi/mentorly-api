@@ -40,8 +40,9 @@
     "vercel": "^21.1.0"
   },
   "scripts": {
-    "start": "nodemon --exec babel-node app.js",
-    "erd": "sequelize-erd --source ./db/instance --destination ./erd.svg"
+    "start": "nodemon app.js",
+    "erd": "sequelize-erd --source ./db/instance --destination ./erd.svg",
+    "deploy": "node app.js"
   },
   "prettier": {
     "jsxBracketSameLine": true,

@@ -11,7 +11,7 @@ app.use(postMiddleware);
 app.use(errorMiddleware);
 
 connect(async () => {
-  app.listen(80, () => {
+  app.listen(8080, () => {
     console.log("😎 App is running fine!");
   });
 });
